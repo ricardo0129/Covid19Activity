@@ -6,10 +6,11 @@ from plot import *
 # draw accordingly. Then read points from standard input until
 # end-of-file, and plot them on standard draw.
 
-stddraw.setCanvasSize(800,800)
-
+stddraw.setCanvasSize(500*2.32,500)
+x0,y0,x1,y1 = 0,0,0,0
 def draw_map(f):
     stdio.setFile(f)
+    global x0,y0,x1,y1
     x0 = stdio.readFloat()
     y0 = stdio.readFloat()
     x1 = stdio.readFloat()
@@ -31,7 +32,7 @@ def draw_map(f):
             previous = [x,y]
 
 def scale_value(x,min,max):
-    a,b = 0.005,0.045
+    a,b = 0.4,1.0
     return (b-a)*(x-min)/(max-min)+a
 
 def show_cases(day):
@@ -44,12 +45,15 @@ def show_cases(day):
         maxi = max(maxi,d[0])
     for d in data:
         v = scale_value(d[0],mini,maxi)
-        stddraw.setPenRadius(max(v,0))
-        stddraw.point(d[2],d[1])
+        #stddraw.setPenRadius(max(v,0))
+        stddraw.circle(d[2],d[1],max(v,0))
 
 def show_map():
+    stddraw.setPenColor(stddraw.BLACK)
+    stddraw.setFontSize(16)
+    stddraw.text(x0+10,y0+1.4,"Covid Cases per State") 
     stddraw.show(1000.0)
 
 draw_map("usa_map.txt")
-show_cases("12")
+show_cases("03-10-2021")
 show_map()
