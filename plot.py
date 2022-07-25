@@ -91,4 +91,4 @@ data = get_data("08-08-2020","02-24-2021","California")
 adjust_7day_avg(data)
 add_data(data,"California")
 show_graph()
-''''
+'''
